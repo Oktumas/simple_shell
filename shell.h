@@ -1,4 +1,4 @@
-fndef _SHELL_H
+#ifndef _SHELL_H
 #define _SHELL_H
 
 #define BUFFSIZE 1024
@@ -16,61 +16,61 @@ fndef _SHELL_H
 extern char **environ;
 
 /**
- *  * serverEnv_s - environment variable
- *   * @PathName: environment name 
- *    * @widepath: global path
- *     * @next: points to the next node
- *      */
+ * serverEnv_s - environment variable
+ * @PathName: environment name 
+ * @widepath: global path
+ * @next: points to the next node
+ */
 
 typedef struct serverEnv_s
 {
-	char *pathName;
-	char *value;
-	char *globPath;
-	struct serverEnv_s *next;
+char *pathName;
+char *value;
+char *globPath;
+struct serverEnv_s *next;
 } serverEnv_t;
 
 /**
- *  * server_s - stores data variable
- *   * @cmdName: command name
- *    * @cmdList: command list
- *     * @argument: argument's arrays
- *      * @buff: buffer
- *       */
+ * server_s - stores data variable
+ * @cmdName: command name
+ * @cmdList: command list
+ * @argument: argument's arrays
+ * @buff: buffer
+ */
 
 typedef struct server_s
 {
-	char *cmdName;
-	char **cmdList;
-	char *pgName;
-	char **history;
-	char *buff;
-	char **argument;
-	serverEnv_t *env;
+char *cmdName;
+char **cmdList;
+char *pgName;
+char **history;
+char *buff;
+char **argument;
+serverEnv_t *env;
 } server_t;
 
 /**
- *  * Error - a structure for error message
- *   * @input: error input
- *    * @errorMessage: pointer to error messange
- *     */
+ * Error - a structure for error message
+ * @input: error input
+ * @errorMessage: pointer to error messange
+ */
 
 typedef struct Error
 {
-	int input;
-	char *errorMessage;
+int input;
+char *errorMessage;
 } Error_t;
 
 /**
- *  * convert_s - convert a structure to a function
- *   * @commandName: input string
- *    * @function: pointer to a function
- *     */
+ * convert_s - convert a structure to a function
+ * @commandName: input string
+ * @function: pointer to a function
+ */
 typedef struct convert_s
 {
 
-	char *cmdName;
-	void (*func)(server_t *);
+char *cmdName;
+void (*func)(server_t *);
 
 } convert_t;
 
@@ -131,9 +131,9 @@ void _unsetEnvironment(server_t *ptrserv);
 void _unsetEnviron(server_t *ptrserv, char *ptrName);
 int _delete(serverEnv_t *ptrH, char *ptrN);
 serverEnv_t *_IndexNode(
-			serverEnv_t *prmHead,
-				unsigned int prmIndex
-		);
+	serverEnv_t *prmHead,
+	unsigned int prmIndex
+);
 int _isNumber(char *s);
 char *_itoa(int ptrNum);
 int _isdigit(char ptrC);
@@ -154,4 +154,3 @@ void _defaultHelp(char *ptrCmd);
 void _setEnvironment(server_t *ptrData);
 
 #endif/*SHELL_H*/
-
