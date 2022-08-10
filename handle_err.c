@@ -1,4 +1,4 @@
-nclude "shell.h"
+include "shell.h"
 
 
 
@@ -6,185 +6,185 @@ void _Error(server_t *ptrData, int m)
 
 {
 
-			
+		
 
-		int i = 0;
-
-
-
-			Error_t errors[] = {
-
-						{00, "Error unknown"},
-
-								{100, "Error reading from Prompt - Zero tokens"},
-
-										{101, "No such file or directory"},
-
-												{102, "FATAL ERROR: UNABLE TO CREATE CHILD PROCESS"},
-
-														{103, "command not found"},
-
-																{104, "FATAL ERROR: NO MEMORY AVAILABLE."},
-
-																		{105, "FATAL ERROR: UNABLE TO CREATE CMD LIST"},
-
-																				{106, "Illegal number"},
-
-																						{999, ""} /* Error Array end condition*/
-
-							};
+	int i = 0;
 
 
 
-				_write(ptrData->pgName);
+	Error_t errors[] = {
 
-					_write(": ");
+		{00, "Error unknown"},
 
-						_write("1");
+		{100, "Error reading from Prompt - Zero tokens"},
 
-							_write(": ");
+		{101, "No such file or directory"},
 
-								_write(ptrData->cmdName);
+		{102, "FATAL ERROR: UNABLE TO CREATE CHILD PROCESS"},
 
-									_write(": ");
+		{103, "command not found"},
 
-										while (i < 9)
+		{104, "FATAL ERROR: NO MEMORY AVAILABLE."},
 
-												{
+		{105, "FATAL ERROR: UNABLE TO CREATE CMD LIST"},
 
-															if (m == (errors + i)->input)
+		{106, "Illegal number"},
 
-																		{
+		{999, ""} /* Error Array end condition*/
 
-																						_write((errors + i)->errorMessage);
+	};
 
-																									_write(": ");
 
-																												_write(ptrData->argument[1]);
 
-																														}
+	_write(ptrData->pgName);
 
-																	i++;
+	_write(": ");
 
-																		}
+	_write("1");
 
-											_write("\n");
+	_write(": ");
+
+	_write(ptrData->cmdName);
+
+	_write(": ");
+
+	while (i < 9)
+
+	{
+
+		if (m == (errors + i)->input)
+
+		{
+
+			_write((errors + i)->errorMessage);
+
+			_write(": ");
+
+			_write(ptrData->argument[1]);
+
+		}
+
+		i++;
+
+	}
+
+	_write("\n");
 
 }
 
 
 
 /**
- *  *
- *   *  * _listEnvLen - length of a linked list
- *    *
- *     *   *
- *      *
- *       *    * @prmHead: first node
- *        *
- *         *     *
- *          *
- *           *      * Return: length
- *            *
- *             *       */
+ *
+ *  * _listEnvLen - length of a linked list
+ *
+ *   *
+ *
+ *    * @prmHead: first node
+ *
+ *     *
+ *
+ *      * Return: length
+ *
+ *       */
 
 int _listEnvLen(serverEnv_t *prmHead)
 
 {
 
-			if (prmHead == NULL)
+		if (prmHead == NULL)
 
-									return (0);
+					return (0);
 
-						if (prmHead->next == NULL)
+			if (prmHead->next == NULL)
 
-													return (1);
+						return (1);
 
-										else
+				else
 
-																		return (_listEnvLen(prmHead->next) + 1);
+							return (_listEnvLen(prmHead->next) + 1);
 
 }
 
 
 
 /**
- *  *
- *   *  * _genGlobal - generate a global environment variable
- *    *
- *     *   *                      from name and value
+ *
+ *  * _genGlobal - generate a global environment variable
+ *
+ *   *                      from name and value
+ *
+ *    * @ptrName: environment name
+ *
+ *     * @ptrV: environment value
+ *
  *      *
- *       *    * @ptrName: environment name
- *        *
- *         *     * @ptrV: environment value
- *          *
- *           *      *
- *            *
- *             *       * Return: global environment variable
- *              *
- *               *        */
+ *
+ *       * Return: global environment variable
+ *
+ *        */
 
 char *_genGlobal(char *ptrName, char *ptrV)
 
 {
 
-			char *tmp, *global;
+		char *tmp, *global;
 
 
 
-						global = "";
+			global = "";
 
-										global = _strconcat(global, ptrName);
+				global = _strconcat(global, ptrName);
 
-															tmp = _strconcat(global, "=");
+					tmp = _strconcat(global, "=");
 
-																					free(global);
+						free(global);
 
-																												global = _strconcat(tmp, ptrV);
+							global = _strconcat(tmp, ptrV);
 
-																																				free(tmp);
+								free(tmp);
 
 
 
-																																													return (global);
+									return (global);
 
 }
 
 
 
 /**
- *  *
- *   *  * _isdigit - test if a character is a number
- *    *
- *     *   *
- *      *
- *       *    * @prmChar: char
- *        *
- *         *     *
- *          *
- *           *      * Return: return 1 if true
- *            *
- *             *       */
+ *
+ *  * _isdigit - test if a character is a number
+ *
+ *   *
+ *
+ *    * @prmChar: char
+ *
+ *     *
+ *
+ *      * Return: return 1 if true
+ *
+ *       */
 
 int _isdigit(char ptrC)
 
 {
 
-			return (ptrC >= '0' && ptrC <= '9');
+		return (ptrC >= '0' && ptrC <= '9');
 
 }
 
 
 
 /**
- *  *
- *   *  * _numLen - length of a number
- *    *
- *     *   * @Num: number
- *      *
- *       *    * Return: length of the number
- *        *
- *         *     */
+ *
+ *  * _numLen - length of a number
+ *
+ *   * @Num: number
+ *
+ *    * Return: length of the number
+ *
+ *     */
 
 
 
@@ -192,45 +192,44 @@ int _numLen(int Num)
 
 {
 
-			int i = 0, num1;
+		int i = 0, num1;
 
 
 
-						if (Num == 0)
+			if (Num == 0)
 
-													return (1);
-
-
-
-										num1 = Num;
+						return (1);
 
 
 
-															if (num1 < 0)
-
-																							{
-
-																																		num1 *= -1;
-
-																																														i++;	/* for the sign char */
-
-																																																											}
+				num1 = Num;
 
 
 
-																					while (num1)
+					if (num1 < 0)
 
-																														{
+							{
 
-																																										num1 /= 10;
+										num1 *= -1;
 
-																																																							i++;
+												i++;	/* for the sign char */
 
-																																																																					}
+													}
 
 
 
-																												return (i);
+						while (num1)
+
+								{
+
+											num1 /= 10;
+
+													i++;
+
+														}
+
+
+
+							return (i);
 
 }
-
