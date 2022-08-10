@@ -1,4 +1,4 @@
-IMPLE_SHELL 1 2021-10-25 GNU
+.TH SIMPLE_SHELL 1 2021-10-25 GNU
 .SH NAME
 sish \- simple shell
 .SH SYNOPSIS
@@ -31,4 +31,3 @@ outputs only the version datestamp.
 .SH AUTHORS
 Mcnore Samuel <samuelmcnores1@gmail.com>
 Evance Chapuma <evancechapuma62@gmail.com>
-
